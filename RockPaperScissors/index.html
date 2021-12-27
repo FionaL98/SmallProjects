@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <p> Ready to play a game of ... </p>
+        <h1>Rock, Paper, Scissors?</h1>
+
+        <p> - PLAYER VS. AI - </p>
+
+        <br><br>
+
+        <container>
+            
+            <button class="selection" value="rock"><img src="images/rock.png"></button>
+            <button class="selection" value="paper"><img src="images/paper.png"></button>
+            <button class="selection" value="scissors"><img src="images/scissors.png"></button>
+            
+        </container><br><br>
+        
+        <p id="displayResult"></p>
+
+
+        <script>
+            //function for the computer to randomly choose option from array  
+            var buttons = document.querySelectorAll("button");
+
+            function computerPlay(){
+               var options = ["rock", "paper", "scissors"];
+               return options[Math.floor(Math.random()*options.length)];
+            };      
+
+            //function to operate the game
+            function playRound(playerSelection){
+                var computerSelection = computerPlay();
+
+                if (computerSelection == playerSelection){
+                    document.getElementById("displayResult").innerHTML = "It was a Draw!";
+                } else if (
+                       (computerSelection == "rock" && playerSelection == "paper") ||
+                       (computerSelection == "paper" && playerSelection == "scissors") ||
+                       (computerSelection == "scissors" && playerSelection == "rock")
+                    ) {
+                    document.getElementById("displayResult").innerHTML = "Player Wins, Computer Loses!";
+                } else if (
+                       (computerSelection == "paper" && playerSelection == "rock") || 
+                       (computerSelection == "scissors" && playerSelection == "paper") || 
+                       (computerSelection == "rock" && playerSelection == "scissors") 
+                    ) {
+                    document.getElementById("displayResult").innerHTML = "Computer Wins, Player Loses!";
+                }  
+            };
+
+            buttons.forEach(button =>{
+                button.addEventListener("click", function(){
+                    console.log(button)
+                    console.log(button.value);
+                    playRound(button.value);
+                })
+            });
+
+
+        </script>
+    </body>
+
+</html>

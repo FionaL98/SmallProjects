@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <Head>
+        <meta charset="utf-8">
+        <title>Etch-a-Sketch</title>
+        <link rel="stylesheet" href="styles.css">
+    </Head>
+
+    <body id="content">
+        <h1>Etch-a-Sketch</h1>
+
+        <section id="container">
+            <div class="square"></div>
+        </section>
+
+        <script>
+            //creating variables and syncing to html elements
+            var cubes = document.getElementsByClassName("square");
+            var container = document.querySelector("section");
+
+            // function activate the actual color change of square
+            const randomColor = () => {
+                var c = '';
+                while (c.length < 6) {
+                    c += (Math.random()).toString(16).substr(-6).substr(-1)
+                }                
+                return '#' + c;
+            };
+
+            var change = randomColor();
+
+            //event listener to activate color change upon mouse entering square
+            document.querySelector('div').addEventListener('mouseover', event => {
+                event.target.style.backgroundColor = randomColor();
+            });
+
+            //loop to create more divs to make grid
+            for (let i = 0; i < 255; i++){
+            const createDiv = document.createElement("div");
+                createDiv.classList.add("square");
+
+                createDiv.addEventListener('mouseover', event => {
+                    event.target.style.backgroundColor = randomColor();
+                });
+
+            container.appendChild(createDiv);
+            };
+            
+
+
+        </script>
+        <script src="script.js"></script>
+
+    </body>
+
+</html>
